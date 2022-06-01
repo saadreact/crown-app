@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import MenuItems from '../menu-items/MenuItems'
+import MenuItems from '../menuItems/MenuItems'
 import './directory.scss'
 
 const Directory = () => {
