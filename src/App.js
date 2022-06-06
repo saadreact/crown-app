@@ -20,7 +20,7 @@ function App() {
             {
               currentUser: {
                 id: snapshot.id,
-                ...snapshot.data(),
+                ...snapshot.data()
               },
             }
           );
