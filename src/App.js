@@ -1,48 +1,55 @@
 import Homepage from "./pages/homepage/Homepage";
 import "./pages/homepage/homepage.scss";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ShopPage from "./pages/shoppage/ShopPage";
 import HeaderComponent from "./components/headerComponent/HeaderComponent";
 import SignInOutPage from "./pages/SignInOutPage/SignInOutPage";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { onSnapshot } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentUser } from "./redux/user/userSlice";
 
 function App() {
-  const [user, setUser] = useState({ currentUser: null });
-
-  useEffect(() => { 
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user.currentUser.currentUser);
+console.log(user);
+  useEffect(() => {
     var unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth); // to check if database has updated
         onSnapshot(userRef, (snapshot) => {
-          setUser(
-            {
-              currentUser: {
-                id: snapshot.id,
-                ...snapshot.data()
-              },
-            }
-          );
+          //for redux 
+          dispatch(setCurrentUser({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data(),
+            },
+          }));
+
+
         }); // snapshot basically listens to changes
       } else {
-        setUser({currentUser:userAuth});
+        // redux
+        dispatch(setCurrentUser({
+          currentUser: userAuth
+        }));
+
       }
     });
     return () => {
       unsubscribe();
     };
   }, []);
-  console.log(user);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <HeaderComponent currentUser={user.currentUser} />
+        <HeaderComponent />
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path="/signin" element={<SignInOutPage />} />
+          <Route path="/signin" element={!user ? <SignInOutPage /> : <Navigate to={'/'} />} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -50,3 +57,5 @@ function App() {
 }
 
 export default App;
+
+
