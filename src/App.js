@@ -8,12 +8,12 @@ import { useEffect } from "react";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { onSnapshot } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUser } from "./redux/user/userSlice";
+import { setCurrentUser } from "./redux/slices/userSlice";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.currentUser.currentUser);
-console.log(user);
+
   useEffect(() => {
     var unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {

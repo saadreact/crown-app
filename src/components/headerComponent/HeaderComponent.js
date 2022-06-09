@@ -3,12 +3,18 @@ import { Link } from "react-router-dom";
 import "./HeaderComponent.scss";
 import { ReactComponent as Logo } from "./../../assets/crown.svg";
 import { auth } from "./../../firebase/firebase.utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import CartIcon from "../cartIcon/CartIcon";
+import { CartDropDown } from "../cartDropDown/CartDropDown";
+import { toggleCart } from "../../redux/slices/cartSlice";
 
 const HeaderComponent = () => {
   const currentUser = useSelector(
     (state) => state.user.currentUser.currentUser
   );
+  const toggler = useSelector(state => state.cart.hidden);
+  const dispatch  = useDispatch();  
+
   return (
     <div className="header">
       <Link to={"/"} className="logo-container">
@@ -34,7 +40,9 @@ const HeaderComponent = () => {
             SignOut
           </div>
         )}
+          <CartIcon  onClick={() => dispatch(toggleCart())}/>
       </div>
+         {toggler ? <CartDropDown/> : null}
     </div>
   );
 };
