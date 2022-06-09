@@ -29,11 +29,11 @@
     }
   ]
 ,
-  "shopPage" :  [
+  "shopPage" : [
     {
       "id": 1,
       "title": "Hats",
-      "routeName": "Sneakers",
+      "routeName": "hats",
       "items": [
         {
           "id": 1,
