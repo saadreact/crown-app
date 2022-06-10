@@ -9,6 +9,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { onSnapshot } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./redux/slices/userSlice";
+import CheckOutPage from "./pages/checkout/CheckOutPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/checkout" element={<CheckOutPage />} />
           <Route path="/signin" element={!user ? <SignInOutPage /> : <Navigate to={'/'} />} />
         </Routes>
       </BrowserRouter>
