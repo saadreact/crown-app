@@ -1,16 +1,11 @@
-import React,{useState,useEffect} from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import MenuItems from '../menuItems/MenuItems'
 import './directory.scss'
 
 const Directory = () => {
-    const[menuItems,setMenuItems ] = useState([]);
+    const menuItems = useSelector(state => state.directory.directoryItems);
 
-    useEffect(()=>{
-        fetch('http://localhost:8001/menuitems').then((res)=>{
-            return res.json()
-        }).then(data => setMenuItems(data));
-    },[])
-    
     return (
         <div className="directory-menu">
             {menuItems?.map((item,idx)=>{

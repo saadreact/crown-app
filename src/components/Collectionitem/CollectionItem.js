@@ -5,10 +5,10 @@ import CustomButton from '../customButton/CustomButton';
 import './CollectionItem.scss';
 
 
-const CollectionItem = ({item}) => {
+const CollectionItem = ({item, collectionwidth}) => {
   const dispatch = useDispatch();
   return (
-    <div className="collection-item">
+    <div className={`collection-item ${collectionwidth ? "collection-width" : ''}`}>
         <div className="image" style={{backgroundImage:`url(${item.imageUrl})`}}></div>
         <div className="collection-footer">
             <span className="name">{item.name}</span>
