@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux';
 import CheckOutItem from '../../components/checkOutItem/CheckOutItem';
+import StripeCheckoutbutton from '../../components/stripeCheckoutbutton/StripeCheckoutbutton';
 import './CheckOutPage.scss';
 
 const CheckOutPage = () => {
@@ -8,7 +9,7 @@ const CheckOutPage = () => {
   const Total = useMemo(
     () =>
     cartItems?.reduce((acc, item) => {
-        return acc + item.price;
+        return acc + (item.price * item.quantity);
       }, 0),
     [cartItems]
   );
@@ -35,7 +36,14 @@ const CheckOutPage = () => {
     {cartItems.map(cartItem => (
       <CheckOutItem key={cartItem.id} cartItem={cartItem} />
     ))}
-    <div className='total'>TOTAL: ${Total}</div>
+    <div className='total'>TOTAL: ${Total}
+    </div>
+    <div className='test-warning'>
+      *Please use the following test credit card for payments*
+      <br />
+      4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+    </div>
+    <StripeCheckoutbutton price={Total}></StripeCheckoutbutton>
   </div>
   )
 }
