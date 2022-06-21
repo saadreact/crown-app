@@ -7,7 +7,7 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
-    }).concat(logger),
+    }).concat(process.env.NODE_ENV == "development" ? logger : null)
   });
 
   export const persistor = persistStore(store);
