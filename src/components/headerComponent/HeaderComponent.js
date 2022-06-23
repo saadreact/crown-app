@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./HeaderComponent.scss";
 import { ReactComponent as Logo } from "./../../assets/crown.svg";
 import { auth } from "./../../firebase/firebase.utils";
 import { useDispatch, useSelector } from "react-redux";
 import CartIcon from "../cartIcon/CartIcon";
 import { CartDropDown } from "../cartDropDown/CartDropDown";
 import { toggleCart } from "../../redux/slices/cartSlice";
+import { HeaderContainer, LogoContainer, OptionLink, OptionsContainer } from "./HeaderComponent.styles";
 
 const HeaderComponent = () => {
   const currentUser = useSelector(
@@ -16,34 +15,32 @@ const HeaderComponent = () => {
   const dispatch  = useDispatch();  
 
   return (
-    <div className="header">
-      <Link to={"/"} className="logo-container">
+    <HeaderContainer>
+      <LogoContainer to={"/"} className="logo-container">
         <Logo className="logo" />
-      </Link>
-      <div className="options">
-        <Link className="option" to={"/shop"}>
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink  to={"/shop"}>
           Shop
-        </Link>
-        <Link className="option" to={"/shop"}>
+        </OptionLink>
+        <OptionLink  to={"/shop"}>
           Contact
-        </Link>
+        </OptionLink>
         {!currentUser ? (
-          <Link className="option" to={"/signin"}>
+          <OptionLink  to={"/signin"}>
             SignIn
-          </Link>
+          </OptionLink>
         ) : (
-          <div
-            className="option"
-            style={{ cursor: "pointer" }}
+          <OptionLink as="div"
             onClick={() => auth.signOut()}
           >
             SignOut
-          </div>
+          </OptionLink>
         )}
           <CartIcon  onClick={() => dispatch(toggleCart())}/>
-      </div>
+      </OptionsContainer>
          {toggler ? <CartDropDown/> : null}
-    </div>
+    </HeaderContainer>
   );
 };
 
