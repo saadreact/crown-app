@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 // Follow this pattern to import other Firebase services
 // import { } from 'firebase/<service>';
@@ -16,7 +16,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
@@ -40,6 +40,38 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     }
   }
   return userRef;
+};
+
+export const addCollectionAndDocs = async (collectionKey, collectionArray) => {
+  if (collectionArray.length == 0) return;
+  // array operations
+  let newArray = Object.values(collectionArray).map((item) => {
+    let { title, items } = item;
+    return { title, items };
+  });
+  // Get a new write batch prevents data loss for complex queries
+
+  newArray.forEach(async (obj) => {
+    await addDoc(collection(db, collectionKey), obj);
+  });
+};
+
+export const updateCollectionFormat = (payload) => {
+  const transformedData = payload.docs.map((item) => {
+    const { title, items } = item.data();
+
+    return {
+      id: item.id,
+      routeName: encodeURI(title.toLowerCase()),
+      title,
+      items,
+    };
+  });
+
+  return transformedData.reduce((acc, item) => {
+    acc[item.title.toLowerCase()] = item;
+    return acc;
+  }, {});
 };
 
 export const provider = new GoogleAuthProvider();

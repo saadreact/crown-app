@@ -251,7 +251,16 @@ export const shopSlice = createSlice({
       },
     },
   },
-  reducers: {},
+  reducers: {
+    updateShopData:(state,action)=>{
+        return{
+          ...state,
+          shop:action.payload
+        }
+    }
+  },
 });
+
+export const { updateShopData } = shopSlice.actions
 
 export const shopReducer = shopSlice.reducer;
