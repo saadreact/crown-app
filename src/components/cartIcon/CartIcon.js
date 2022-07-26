@@ -17,7 +17,7 @@ const CartIcon = () => {
   );
 
   return (
-    <div className="cart-icon" onClick={() => dispatch(toggleCart())}>
+    <div className="cart-icon" onClick={() => dispatch(toggleCart({type:"TOGGLE_CART"}))}>
       <ShoppingIcon className="shopping-icon" />
       <span className="item-count">{memoisedLength}</span>
     </div>

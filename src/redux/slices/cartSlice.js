@@ -9,17 +9,34 @@ export const cartSlice = createSlice({
   },
   reducers: {
     toggleCart: (state, action) => {
-      state.hidden = !state.hidden
+      debugger;
+      switch (action.payload.type) {
+        case "TOGGLE_CART":
+          state.hidden = !state.hidden;
+          break;
+          case "ADD_TO_CART":
+            state.cartItems = addItemsWithQuantityCheck(state.cartItems,action.payload.payload);
+            break;
+            case "REMOVE_FROM_CART":
+              state.cartItems = removeItemFromCart(state.cartItems,action.payload.payload);
+              break;
+              case "CLEAR_ITEM_FROM_CART":
+                state.cartItems = state.cartItems.filter(item => item.id != action.payload.payload.id);
+                break;  
+      
+        default:
+          return state;
+      }
     },
-    addCartItems: (state, action) =>{
-        state.cartItems = addItemsWithQuantityCheck(state.cartItems,action.payload);
-    },
-    clearItem:(state, action) =>{
-      state.cartItems = state.cartItems.filter(item => item.id != action.payload.id);
-    },
-    removeItem:(state, action) =>{
-      state.cartItems = removeItemFromCart(state.cartItems,action.payload);
-    }
+    // addCartItems: (state, action) =>{
+    //     state.cartItems = addItemsWithQuantityCheck(state.cartItems,action.payload.payload);
+    // },
+    // clearItem:(state, action) =>{
+    //   state.cartItems = state.cartItems.filter(item => item.id != action.payload.payload.id);
+    // },
+    // removeItem:(state, action) =>{
+    //   state.cartItems = removeItemFromCart(state.cartItems,action.payload.payload);
+    // }
 
   }
 })

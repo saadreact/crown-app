@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addCartItems, clearItem, removeItem } from "../../redux/slices/cartSlice";
+import { toggleCart } from "../../redux/slices/cartSlice";
 import "./CheckOutItem.scss";
 
 const CheckOutItem = ({ cartItem }) => {
@@ -14,14 +14,14 @@ const CheckOutItem = ({ cartItem }) => {
             </div>
             <span className="name">{name}</span>
             <span className="quantity">
-                <div className="arrow" onClick={() => dispatch(removeItem(cartItem))}>
+                <div className="arrow" onClick={() => dispatch(toggleCart({type:"REMOVE_FROM_CART",payload:cartItem}))}>
                     &#10094;
                 </div>
                 <span className="value">{quantity}</span>
-                <div className="arrow" onClick={() => dispatch(addCartItems(cartItem))}>&#10095;</div>
+                <div className="arrow" onClick={() => dispatch(toggleCart({type:"ADD_TO_CART",payload:cartItem}))}>&#10095;</div>
             </span>
             <span className="price">${price}</span>
-            <div className="remove-button" onClick={() => dispatch(clearItem(cartItem))}>&#10005;</div>
+            <div className="remove-button" onClick={() => dispatch(toggleCart({type:"CLEAR_ITEM_FROM_CART",payload:cartItem}))}>&#10005;</div>
         </div>
     );
 };

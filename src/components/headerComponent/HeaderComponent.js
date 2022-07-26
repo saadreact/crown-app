@@ -23,9 +23,9 @@ const HeaderComponent = () => {
         <OptionLink  to={"/shop"}>
           Shop
         </OptionLink>
-        <OptionLink  to={"/shop"}>
+        {/* <OptionLink  to={"/shop"}>
           Contact
-        </OptionLink>
+        </OptionLink> */}
         {!currentUser ? (
           <OptionLink  to={"/signin"}>
             SignIn
