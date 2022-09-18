@@ -1,25 +1,20 @@
-import { collection, onSnapshot, query } from 'firebase/firestore';
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import CollectionItem from '../../components/Collectionitem/CollectionItem';
-import { db, updateCollectionFormat } from '../../firebase/firebase.utils';
-import { updateShopData } from '../../redux/slices/shopSlice';
-import NotFound from '../notfound/NotFound';
+import CollectionItem from '../../components/collectionitem/CollectionItem';
+import { Spinner } from '../../components/withSpinner/WithSpinner';
+import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions';
 import './CollectionPage.scss';
 
 const CollectionPage = () => {
   const {name} =  useParams();
   const items = useSelector(state => state.shop.shop[name]?.items);
   const dispatch = useDispatch();
-  useEffect(() => {
-    const collectionRef = query(collection(db, "collection"));
-    onSnapshot(collectionRef, (snapshot) => {
-       const recData = updateCollectionFormat(snapshot);
-       dispatch(updateShopData(recData));
-    });
-  }, []);
- 
+  
+  React.useEffect(() => {
+    dispatch(fetchCollectionStartAsync())
+  },[])
+
   return (
     items ? <div className='collection-page'>
       <div className='items'>
@@ -27,7 +22,7 @@ const CollectionPage = () => {
           <CollectionItem key={item.id} item={item} />
         ))}
       </div>
-    </div> : <NotFound />
+    </div> : <Spinner />
   )
 }
 

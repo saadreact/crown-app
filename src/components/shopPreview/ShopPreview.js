@@ -1,8 +1,8 @@
 import React from "react";
-import CollectionItem from "../Collectionitem/CollectionItem";
-import "./CollectionPreview.scss";
+import CollectionItem from "../collectionitem/CollectionItem";
+import "./ShopPreview.scss";
 
-const CollectionPreview = ({ items }) => {
+const ShopPreview = ({ items }) => {
   return (
     <div className="collection-preview">
       <h1 className="title">{items.title}</h1>
@@ -15,4 +15,4 @@ const CollectionPreview = ({ items }) => {
   );
 };
 
-export default CollectionPreview;
+export default ShopPreview;

@@ -1,39 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { directoryActionTypes } from "../directory/directory.types";
 
 export const directorySlice = createSlice({
   name: "directory",
   initialState: {
+    isFetching:false,
     directoryItems: [
-      {
-        title: "hats",
-        imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-        id: 1,
-      },
-      {
-        title: "jackets",
-        imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-        id: 2,
-      },
-      {
-        title: "sneakers",
-        imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-        id: 3,
-      },
-      {
-        title: "womens",
-        imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-        size: "large",
-        id: 4,
-      },
-      {
-        title: "mens",
-        imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-        size: "large",
-        id: 5,
-      },
     ],
   },
-  reducers: {},
+  reducers: {
+    updateDirCollection(state,action){
+
+      switch(action.payload.type){
+        case directoryActionTypes.FETCH_DIR_COLLECTIONS_START:
+          return{
+            ...state,
+            isFetching:true
+          }
+          case directoryActionTypes.FETCH_DIR_COLLECTIONS_SUCCESS:
+            return{
+              ...state,
+              isFetching:false,
+              directoryItems:action.payload.payload
+            }
+            
+          default:
+            return state;
+      }
+
+    }
+  },
 });
+
+export const { updateDirCollection } = directorySlice.actions;
 
 export const directoryReducer = directorySlice.reducer;
