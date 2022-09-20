@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import MenuItems from '../menuItems/MenuItems'
+import { Spinner } from '../withSpinner/WithSpinner'
 import './directory.scss'
 
 const Directory = () => {
@@ -8,7 +9,7 @@ const Directory = () => {
 
     return (
         <div className="directory-menu">
-            {menuItems?.map((item,idx)=>{
+            {!menuItems ? <Spinner/> : menuItems?.map((item,idx)=>{
                 return <MenuItems item={item} key={idx} />
 
             })}

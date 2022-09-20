@@ -2,10 +2,10 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { toggleCart } from '../../redux/slices/cartSlice';
 import { CustomButtonContainer } from '../customButton/CustomButton.styles';
-import { CollectionItemContainer, CollectionFooter,CollectionItemPrice,CollectionItemName, CollectionImage } from './CollectionItem.style';
+import { CollectionItemContainer, CollectionFooter,CollectionItemPrice,CollectionItemName, CollectionImage } from './CollectionItemComp.style';
 
 
-const CollectionItem = ({item, collectionwidth}) => {
+export const CollectionItem = ({item, collectionwidth}) => {
   const dispatch = useDispatch();
   return (
     <CollectionItemContainer collectionwidth={collectionwidth}>
@@ -19,4 +19,3 @@ const CollectionItem = ({item, collectionwidth}) => {
   )
 }
 
-export default CollectionItem
