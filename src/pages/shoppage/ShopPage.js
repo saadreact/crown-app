@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import CollectionOverview from "../../components/collectionOverview/CollectionOverview";
+import CollectionOverview from "../../components/shopCollectionOverview/CollectionOverview";
 import { fetchCollectionStartAsync } from "../../redux/shop/shop.actions";
 
 const ShopPage = () => {
