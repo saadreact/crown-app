@@ -10,8 +10,8 @@ import { onSnapshot } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./redux/slices/userSlice";
 import CheckOutPage from "./pages/checkout/CheckOutPage";
-import CollectionPage from "./pages/collectionPage/CollectionPage";
 import NotFound from "./pages/notfound/NotFound";
+import CollectionPageComp from "./pages/collectionPages/CollectionPageComp";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path="/shop/:name" element={<CollectionPage />} />
+          <Route path="/shop/:name" element={<CollectionPageComp />} />
           <Route path="/checkout" element={<CheckOutPage />} />
           <Route path="/signin" element={!user ? <SignInOutPage /> : <Navigate to={'/'} />} />
           <Route path="*" element={<NotFound />} />
