@@ -9,6 +9,7 @@ export const cartSlice = createSlice({
   },
   reducers: {
     toggleCart: (state, action) => {
+      
       switch (action.payload.type) {
         case "TOGGLE_CART":
           state.hidden = !state.hidden;

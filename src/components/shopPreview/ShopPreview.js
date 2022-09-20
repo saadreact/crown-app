@@ -1,6 +1,6 @@
 import React from "react";
-import CollectionItem from "../collectionitem/CollectionItem";
-import "./ShopPreview.scss";
+import { CollectionItem } from "../collectionitems/CollectionItem";
+import "./CollectionPreview.scss";
 
 const ShopPreview = ({ items }) => {
   return (

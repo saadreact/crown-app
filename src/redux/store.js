@@ -11,10 +11,9 @@ export const store = configureStore({
         serializableCheck: false,
       });
 
-      middleware = middleware.concat(thunk);
+      middleware = middleware.concat(thunk)
 
-
-      if (process.env.NODE_ENV == "development") {
+      if (process.env.NODE_ENV === "development") {
         middleware = middleware.concat(logger);
       }
       return middleware;

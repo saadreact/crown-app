@@ -1,20 +1,21 @@
-import React from 'react';
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import CollectionItem from '../../components/collectionitem/CollectionItem';
-import { Spinner } from '../../components/withSpinner/WithSpinner';
+import './collectionPageStyles.scss';
 import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions';
-import './CollectionPage.scss';
+import { Spinner } from '../../components/withSpinner/WithSpinner';
+import { CollectionItem } from '../../components/collectionitems/CollectionItem';
 
-const CollectionPage = () => {
+const CollectionPageComp = () => {
   const {name} =  useParams();
   const items = useSelector(state => state.shop.shop[name]?.items);
   const dispatch = useDispatch();
-  
-  React.useEffect(() => {
-    dispatch(fetchCollectionStartAsync())
-  },[])
 
+  useEffect(() => {
+    dispatch(fetchCollectionStartAsync())
+  }, []);
+ 
   return (
     items ? <div className='collection-page'>
       <div className='items'>
@@ -26,4 +27,4 @@ const CollectionPage = () => {
   )
 }
 
-export default CollectionPage
+export default CollectionPageComp

@@ -9,7 +9,7 @@ const Directory = () => {
 
     return (
         <div className="directory-menu">
-            {!menuItems ? <Spinner/> :menuItems.map((item,idx)=>{
+            {!menuItems ? <Spinner/> : menuItems?.map((item,idx)=>{
                 return <MenuItems item={item} key={idx} />
 
             })}
