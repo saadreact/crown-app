@@ -40,6 +40,7 @@ function App() {
 
       }
     });
+    console.log("environment check::::::::",process.env.NODE_ENV);
     return () => {
       unsubscribe();
     };
