@@ -58,7 +58,7 @@ const SignIn = () => {
         }));
 
         toast.update(id, { render: "Logged in successfully", type: "success", isLoading: false,autoClose:3000 });
-        navigate("/home");
+        navigate("/checkout");
         toast.clearWaitingQueue();
         
         setState({
@@ -93,7 +93,7 @@ const SignIn = () => {
           }
         }));
         toast.update({ render: "Logged in successfully", type: "success", isLoading: false,autoClose:3000 });
-        navigate("/home");
+        navigate("/");
 
         
       })

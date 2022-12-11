@@ -11,6 +11,9 @@ export const HeaderContainer =  styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
+    @media screen and (max-width:600px) {
+      height:40px;
+    }
 `;
 
 
@@ -18,6 +21,9 @@ export const LogoContainer = styled(Link)`
       height: 100%;
       width: 70px;
       padding: 25px;
+      @media screen and (max-width:600px) {
+            padding: 0;
+      }
 `;
 
 export const OptionsContainer = styled.div`

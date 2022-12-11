@@ -26,7 +26,8 @@ export const CollectionItemContainer = styled.div`
   }
   @media screen and (max-width:600px) {
     width:100%;
-    height: 550px;
+    height: 380px;
+    margin-bottom:15px;
   }
 `;
 

@@ -19,7 +19,7 @@ const HeaderComponent = () => {
 
   return (
     <HeaderContainer>
-      <LogoContainer to={"/home"} className="logo-container">
+      <LogoContainer to={"/"} className="logo-container">
         <Logo className="logo" />
       </LogoContainer>
       <OptionsContainer>
@@ -30,7 +30,7 @@ const HeaderComponent = () => {
           Contact
         </OptionLink> */}
         {!currentUser ? (
-          <OptionLink  to={"/"}>
+          <OptionLink  to={"/signIn"}>
             SignIn
           </OptionLink>
         ) : (
@@ -40,7 +40,7 @@ const HeaderComponent = () => {
               dispatch(setCurrentUser({
                 currentUser: undefined
               }));
-              navigate("/");
+              // navigate("/");
             }}
           >
             SignOut
