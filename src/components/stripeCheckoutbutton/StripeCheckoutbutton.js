@@ -1,6 +1,7 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import "./StripeCheckoutbutton.scss";
+import { toast } from 'react-toastify';
 
 const StripeCheckoutbutton = ({ price }) => {
   const perishableKEY =
@@ -8,8 +9,7 @@ const StripeCheckoutbutton = ({ price }) => {
   const priceForStripe = price * 100;
 
   const onToken = (token) => {
-    console.log(token);
-    alert("payment successful");
+    toast.success("payment successful");
   };
 
   return (
