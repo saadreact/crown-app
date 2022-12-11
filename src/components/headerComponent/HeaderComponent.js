@@ -6,6 +6,8 @@ import CartIcon from "../cartIcon/CartIcon";
 import { CartDropDown } from "../cartDropDown/CartDropDown";
 import { toggleCart } from "../../redux/slices/cartSlice";
 import { HeaderContainer, LogoContainer, OptionLink, OptionsContainer } from "./HeaderComponent.styles";
+import { setCurrentUser } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const HeaderComponent = () => {
   const currentUser = useSelector(
@@ -13,10 +15,11 @@ const HeaderComponent = () => {
   );
   const toggler = useSelector(state => state.cart.hidden);
   const dispatch  = useDispatch();  
+  const navigate = useNavigate();
 
   return (
     <HeaderContainer>
-      <LogoContainer to={"/"} className="logo-container">
+      <LogoContainer to={"/home"} className="logo-container">
         <Logo className="logo" />
       </LogoContainer>
       <OptionsContainer>
@@ -27,12 +30,18 @@ const HeaderComponent = () => {
           Contact
         </OptionLink> */}
         {!currentUser ? (
-          <OptionLink  to={"/signin"}>
+          <OptionLink  to={"/"}>
             SignIn
           </OptionLink>
         ) : (
           <OptionLink as="div"
-            onClick={() => auth.signOut()}
+            onClick={() => {
+              auth.signOut();
+              dispatch(setCurrentUser({
+                currentUser: undefined
+              }));
+              navigate("/");
+            }}
           >
             SignOut
           </OptionLink>

@@ -24,6 +24,10 @@ export const CollectionItemContainer = styled.div`
     opacity: 0.85;
     display: flex;
   }
+  @media screen and (max-width:600px) {
+    width:100%;
+    height: 550px;
+  }
 `;
 
 export const CollectionFooter = styled.div`
@@ -42,4 +46,6 @@ export const CollectionItemName = styled.span`
 export const CollectionItemPrice = styled.span`
   width: 90%;
   margin-bottom: 15px;
+  display:flex;
+  justify-content:flex-end;
 `;

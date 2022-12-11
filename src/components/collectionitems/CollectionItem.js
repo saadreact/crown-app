@@ -12,7 +12,7 @@ export const CollectionItem = ({item, collectionwidth}) => {
         <CollectionImage style={{backgroundImage:`url(${item.imageUrl})`}}></CollectionImage>
         <CollectionFooter>
             <CollectionItemName>{item.name}</CollectionItemName>
-            <CollectionItemPrice>{item.price}</CollectionItemPrice>
+            <CollectionItemPrice>${item.price}</CollectionItemPrice>
         </CollectionFooter>
         <CustomButtonContainer collectionButton onClick={() => dispatch(toggleCart({type:"ADD_TO_CART",payload:item}))}>Add to cart</CustomButtonContainer>
     </CollectionItemContainer>

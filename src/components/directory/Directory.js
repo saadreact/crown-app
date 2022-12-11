@@ -6,10 +6,11 @@ import './directory.scss'
 
 const Directory = () => {
     const menuItems = useSelector(state => state.directory.directoryItems);
-
+    const isFetching = useSelector(state => state.directory.isFetching);
+    
     return (
         <div className="directory-menu">
-            {!menuItems ? <Spinner/> : menuItems?.map((item,idx)=>{
+            {isFetching ? <Spinner/> : menuItems?.map((item,idx)=>{
                 return <MenuItems item={item} key={idx} />
 
             })}

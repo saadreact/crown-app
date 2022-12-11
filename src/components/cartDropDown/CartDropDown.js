@@ -36,7 +36,7 @@ export const CartDropDown = () => {
           <CustomButton
             onClick={() => {
               dispatch(toggleCart({type:"TOGGLE_CART"}));
-              navigate("/");
+              navigate("/home");
             }}
           >
             GO TO HOME PAGE
